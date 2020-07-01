@@ -1,0 +1,32 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+double fun(double x) {
+	return 4 * (1 - x * x) - exp(x);
+}
+
+double fun1(double x) {
+	return -8 * x - exp(x);
+}
+
+int main() {
+
+	cout.precision(8);
+
+	int i = 0;
+
+	double x0 = 10,
+		x1 = 0.5,// - обе производные <0
+		e = 0.00000001;
+
+	while (e < abs(x1 - x0) && i < 30)
+	{
+		x0 = x1;
+		x1 = x0 - fun(x0) / fun1(0.5);
+		i++;
+	}
+
+	cout << x1 << "  " << i;
+}
